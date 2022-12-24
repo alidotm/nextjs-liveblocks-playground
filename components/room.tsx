@@ -4,7 +4,7 @@ import {
 	useOthersMapped,
 	useRoom,
 	useUpdateMyPresence,
-} from "../../liveblocks.config";
+} from "../liveblocks.config";
 
 const Room: FC = () => {
 	const others = useOthers();
@@ -13,6 +13,8 @@ const Room: FC = () => {
 	const updateMyPresense = useUpdateMyPresence();
 
 	const mouseMove = (e: MouseEvent) => {
+		console.log("Updating");
+
 		updateMyPresense({
 			cursor: {
 				x: e.pageX,
@@ -31,6 +33,8 @@ const Room: FC = () => {
 		};
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
+
+	console.log(cursor);
 
 	return (
 		<main className="py-28 w-full min-h-screen flex justify-center items-center">

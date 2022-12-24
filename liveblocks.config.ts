@@ -1,8 +1,10 @@
 import { createClient } from "@liveblocks/client";
 import { createRoomContext } from "@liveblocks/react";
 
-const client = createClient({
+export const client = createClient({
 	authEndpoint: "/api/auth",
+	throttle: 80,
+    
 });
 
 type Presence = {
@@ -21,7 +23,7 @@ export const {
 	suspense: {
 		RoomProvider,
 		useMyPresence,
-        useUpdateMyPresence,
+		useUpdateMyPresence,
 		useObject,
 		useRoom,
 		useOthersMapped,
