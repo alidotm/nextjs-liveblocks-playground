@@ -8,7 +8,8 @@ const client = createClient({
 type Presence = {
 	// cursor: { x: number, y: number } | null,
 	// ...
-	cursor: { x: number; y: number } | null;
+	cursor: { x: number; y: number };
+	// name: string;
 };
 
 type Storage = {
@@ -20,9 +21,11 @@ export const {
 	suspense: {
 		RoomProvider,
 		useMyPresence,
+        useUpdateMyPresence,
 		useObject,
 		useRoom,
 		useOthersMapped,
+		useOthers,
 	},
 	/* ...all the other hooks you’re using... */
 } = createRoomContext<Presence, Storage /* UserMeta, RoomEvent */>(client);

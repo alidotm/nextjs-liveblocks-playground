@@ -7,11 +7,6 @@ export default async function auth(req: NextApiRequest, res: NextApiResponse) {
 	const result = await authorize({
 		room: room,
 		secret: process.env.LIVEBLOCKS_API_KEY as string,
-		// userId: "123", // Optional
-		// groupIds: ["456"], // Optional
-		userInfo: {
-			username,
-		},
 	});
 	return res.status(result.status).end(result.body);
 }

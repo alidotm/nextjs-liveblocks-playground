@@ -1,7 +1,11 @@
 import Head from "next/head";
 import Link from "next/link";
+import { useState } from "react";
 
 export default function Home() {
+	//room state
+	const [roomId, setRoomId] = useState<string>("");
+
 	return (
 		<>
 			<Head>
@@ -26,16 +30,18 @@ export default function Home() {
 					</label>
 					<input
 						type="text"
+						value={roomId}
+						onChange={(e) => setRoomId(e.target.value)}
 						id="room-id"
 						className="bg-transparent focus:outline-none flex-grow"
 					/>
 				</div>
 
 				<Link
-					href={`/`}
-					className="group w-full max-w-xs mb-16 mt-3 relative inline-flex items-center overflow-hidden rounded-full bg-black px-6 py-3 text-white focus:outline-none focus:ring active:bg-black"
+					href={`/${roomId}`}
+					className="group w-full max-w-xs mb-16 mt-3 relative inline-flex items-center overflow-hidden rounded-full bg-black px-6 py-3 text-white focus:outline-none focus:ring-2 active:bg-gray-400 focus-within:ring-gray-400 focus-within:ring-offset-1"
 				>
-					<span className="absolute right-0 translate-x-full transition-transform group-hover:-translate-x-4">
+					<span className="absolute right-0 translate-x-full transition-transform group-hover:-translate-x-4 group-focus:-translate-x-4">
 						<svg
 							className="h-5 w-5"
 							xmlns="http://www.w3.org/2000/svg"
