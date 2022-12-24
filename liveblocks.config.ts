@@ -17,10 +17,12 @@ type Storage = {
 };
 
 export const {
-	RoomProvider,
-	useMyPresence,
-	useObject,
-	useRoom,
-	useOthersMapped,
+	suspense: {
+		RoomProvider,
+		useMyPresence,
+		useObject,
+		useRoom,
+		useOthersMapped,
+	},
 	/* ...all the other hooks you’re using... */
 } = createRoomContext<Presence, Storage /* UserMeta, RoomEvent */>(client);
