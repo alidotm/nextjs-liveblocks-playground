@@ -1,26 +1,18 @@
 "use client";
 
-import { NextPage } from "next";
+import { GetServerSideProps, GetServerSidePropsContext, NextPage } from "next";
 import Room from "../components/room";
 
 import { ClientSideSuspense } from "@liveblocks/react";
 import { RoomProvider } from "../liveblocks.config";
-import { useRouter } from "next/router";
 
-const TopRoom: NextPage = () => {
-	const router = useRouter();
+type Props = {
+	roomId: string;
+};
 
-	const id = router.query.id;
-
-	if (!id) {
-		return <div className="mt-28">No room id found</div>;
-	}
-
+const TopRoom: NextPage<Props> = ({ roomId }) => {
 	return (
-		<RoomProvider
-			id={id as string}
-			initialPresence={{ cursor: { x: 0, y: 0 } }}
-		>
+		<RoomProvider id={roomId} initialPresence={{ cursor: { x: 0, y: 0 } }}>
 			<ClientSideSuspense
 				fallback={
 					<div className="w-full flex justify-center mt-28">
@@ -32,6 +24,22 @@ const TopRoom: NextPage = () => {
 			</ClientSideSuspense>
 		</RoomProvider>
 	);
+};
+
+export const getServerSideProps: GetServerSideProps = async (
+	ctx: GetServerSidePropsContext
+) => {
+	if (!ctx.params?.id) {
+		return {
+			notFound: true,
+		};
+	}
+
+	return {
+		props: {
+			roomId: ctx.params?.id,
+		},
+	};
 };
 
 export default TopRoom;
